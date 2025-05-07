@@ -1,14 +1,14 @@
-from flask import Flask
+import os
+import newrelic.agent
 
+newrelic.agent.initialize(
+    license_key=os.getenv('6b47aab476d8e115219d8b2e3dd776d8FFFFNRAL'),
+    app_name='Flask-CICD'
+)
+
+from flask import Flask
 app = Flask(__name__)
 
 @app.route('/')
-def home():
-    return 'Bem-vindo ao Projeto CI/CD com Jenkins! Nova atualização!!'
-
-@app.route('/health')
-def health():
-    return 'OK', 200
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+def hello():
+    return "Hello, World!"
